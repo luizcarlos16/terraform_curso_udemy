@@ -1,0 +1,24 @@
+Para exibir detalhes de seus recursos, como ID e outras informações, faça:
+- terraform show
+
+Mas isso traz tudo, caso queira menos informações e algo mais especifico, tente:
+
+Vamos pegar apenas uma informação do nosso bucket:
+No terminal: 
+- terraform console
+> aws_s3_bucket.b.id
+my-tf-test-bucket-20122019192932
+
+Ou, vamos pegar as tags:
+No terminal:
+- terraform console
+> aws_s3_bucket.b.tags
+{
+  "Environment" = "Dev"
+  "Name" = "My bucket"
+}
+
+Você pode usar esse recurso em seus arquivos .tf, caso precise recuperar alguma informação de um recurso para usar em outro, vejam:
+
+...
+
