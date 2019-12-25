@@ -1,0 +1,5 @@
+Bucket S3
+terraform taint aws_s3_bucket.b   
+
+Object Bucket 
+terraform taint aws_s3_bucket_object.object

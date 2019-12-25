@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "b" {
   bucket = "my-tf-test-bucket-20122019192932"
-  acl    = "private"
+  #acl    = "private"
 
   tags = {
     Name        = "My super bucket again 2"

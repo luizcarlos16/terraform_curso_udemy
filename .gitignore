@@ -2,3 +2,6 @@
 terraform.tfstate
 terraform.tfstate.backup
 export-environment.txt
+/06-variaveis/variables.tf
+/06-variaveis/prod.tfvars
+/06-variaveis/stg.tfvars
