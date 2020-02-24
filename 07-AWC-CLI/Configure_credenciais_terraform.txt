@@ -1,0 +1,49 @@
+AWS CLI
+
+Configure suas credenciais de 3 maneiras:
+
+Mais rápido e prático:
+
+Com o AWS CLI instalado, chame no terminal: aws configure
+Ele irá solicitar as keys, região e tipo de saída dos dados, só isso e td estará configurado.
+
+Menos rápido, mas inseguro:
+
+Configure suas variáveis em variable.tf
+
+```
+variable "access_key" {
+  default = "AKIAWAKD123K213JK213"
+}
+variable "secret_key" {
+  default = "KFksdmkasjdkj1k23jkjAjkjk4124kjad"
+}
+```
+
+Após, chame em seu main.tf esses valores na tag provider, veja:
+
+```
+# Configure the AWS Provider
+provider "aws" {
+  access_key = var.access_key
+  secret_key = var.secret_key
+  region = var.region
+}
+```
+
+Mais rápido, prático para CI/CD e mais seguro:
+Configure por variável de ambiente do sistema operacional, basta dar um export nos valores abaixo:
+
+export AWS_ACCESS_KEY_ID="AKIAWAKD123K213JK213"
+export AWS_SECRET_ACCESS_KEY="KFksdmkasjdkj1k23jkjAjkjk4124kjad"
+export AWS_DEFAULT_REGION="us-east-1"
+
+Após, chame a tag provider em seus .tf apenas informando a cloud, exemplo:
+
+```
+provider "aws" {
+  # access_key = var.access_key - não é necessário via export
+  # secret_key = var.secret_key - não é necessário via export
+  # region = var.region - não é necessário via export
+}
+```
