@@ -1,0 +1,31 @@
+Comandos interessantes
+
+- terraform fmt -recursive
+	- Organiza a estrutura do código, remove espaços desnecessários.
+- terraform get -update
+	- Baixa os módulos do projeto. Caso rode o init ele já baixa os módulos.
+- terraform import 
+	- Importa para seu tfstate recursos que você não tem no seu tfstate.
+	- Como executar: 
+		1. terraform import aws_s3_bucket.meu_bucket myrenasti   - onde myrenasti é o nome do meu bucket no S3, e aws_s3_bucket.meu_bucket é o tipo do recurso mais o nome do mesmo que será importado. O resultado desse comando será um erro informando você para adicionar o recurso no seu arquivo.tf, algo semelhante a isso: 
+
+		2. adicione ao arquivo e complete com as infos do seu bucket na aws, o Terraform não irá fazer isso por vc, veja como ficou:
+
+		3. Agora rode o comando novamente (terraform import aws_s3_bucket.meu_bucket myrenasti) e ele importará para seu tfstate o recurso.
+		4. Para validar, eu alterei o mesmo para um módulo e fiz upload de um arquivo para o bucket, veja: 
+		5. Repare que o name é o nome do meu bucket no s3.
+```
+module "bucket-3" {
+  source = "./s3"
+  name       = "myrenasti"
+  acl = "private"
+  create_object = true
+  object_key    = "files/${random_id.bucket.dec}.txt"
+  object_source = "file.txt"
+}
+```
+- terraform graph
+	- Comando gerado para criar um grafo da estrutura de seus recursos.
+	- Você pode criar essa estrutura no formato de svg, com o auxilio do GraphViz, veja mais em: https://www.terraform.io/docs/commands/graph.html
+		- Criando o svg:
+			- terraform graph | dot -Tsvg > graph.svg
